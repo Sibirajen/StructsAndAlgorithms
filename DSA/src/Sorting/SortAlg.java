@@ -37,6 +37,7 @@ public class SortAlg {
       arr[j+1] = key;
     }
   }
+  // merge sort
   private void merge(int[] arr,int l,int m,int r){
     int n1 = m - l + 1;
     int n2 = r - m;
@@ -82,6 +83,7 @@ public class SortAlg {
       merge(arr,l,m,r);
     }
   }
+  // quick sort
   private int partition(int[] arr,int low,int high){
     int pivot = arr[high];
     int i = low - 1;
@@ -101,5 +103,35 @@ public class SortAlg {
       quickSort(arr,pivot+1,high);
     }
   }
-  
+  // heap sort
+  public void heapify(int[] arr,int n,int i){
+	  int largest = i;
+	  int l = 2*i + 1;
+	  int r = 2*i + 2;
+	  
+	  if(l < n && arr[l] > arr[largest]) {
+		  largest = l;
+	  }
+	  
+	  if(r < n && arr[r] > arr[largest]) {
+		  largest = r;
+	  }
+	  
+	  if(largest != i) {
+		  swap(arr,largest,i);
+		  heapify(arr,n,largest);
+	  }
+  }
+  public void heapSort(int[] arr){
+	  int n = arr.length;
+	  
+	  for(int i=n/2-1;i>=0;i--) {
+		  heapify(arr,n,i);
+	  }
+	  
+	  for(int i=n-1;i>=0;i--) {
+		  swap(arr,0,i);
+		  heapify(arr,i,0);
+	  }
+  }
 }

@@ -12,7 +12,8 @@ public class Main {
 //    srt.selectionSort(arr);
 //    srt.insertionSort(arr);
 //    srt.mergeSort(arr,0, arr.length-1);
-      srt.quickSort(arr,0,arr.length-1);
+//    srt.quickSort(arr,0,arr.length-1);
+    srt.heapSort(arr);
     System.out.println(Arrays.toString(arr));
   }
 }
