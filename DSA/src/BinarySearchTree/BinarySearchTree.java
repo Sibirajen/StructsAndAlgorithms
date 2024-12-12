@@ -18,9 +18,8 @@ public class BinarySearchTree {
 	}
 	
 	private Node insert(Node curr,int data){
-		Node newNode = new Node(data);
-		if(root == null){
-			return newNode;
+		if(curr == null){
+			return new Node(data);
 		}
 		
 		if(curr.data > data){
@@ -30,5 +29,64 @@ public class BinarySearchTree {
 		    curr.right = insert(curr.right,data);
 		}
 		return curr;
+	}
+	
+	//BST delete
+	public void delete(int data) {
+		root = delete(root,data);
+	}
+	
+	private Node delete(Node curr,int data) {
+		if(curr == null) {
+			return curr;
+		}
+		
+		if(curr.data > data) {
+			curr.left = delete(curr.left,data);
+		}
+		else if(curr.data < data) {
+			curr.right = delete(curr.right,data);
+		}
+		else {
+			if(curr.left == null) {
+				return curr.right;
+			}
+			if(curr.right == null) {
+				return curr.left;
+			}
+			
+			Node succ = getInOrderSucc(curr);
+			curr.data = succ.data;
+			curr.right = delete(curr.right,succ.data);
+		}
+		return curr;
+	}
+	
+	
+	//method to get the inOrder successor
+	private Node getInOrderSucc(Node curr) {
+		curr = curr.right;
+		while(curr.left != null && curr != null) {
+			curr = curr.left;
+		}
+		return curr;
+	}
+	
+	//BST print tree
+	public void printTree() {
+		printTree(root);
+		System.out.println();
+	}
+	
+	private void printTree(Node curr) {
+		if(curr == null) {
+			return;
+		}
+		
+		printTree(curr.left);
+		
+		System.out.print(curr.data+" ");
+		
+		printTree(curr.right);
 	}
 }
