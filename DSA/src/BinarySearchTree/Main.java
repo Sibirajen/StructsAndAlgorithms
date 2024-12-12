@@ -20,5 +20,8 @@ public class Main {
 		BST.printTree();
 		BST.delete(50);
 		BST.printTree();
+		
+		BST.find(60);
+		BST.find(10);
 	}
 }

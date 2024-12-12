@@ -89,4 +89,25 @@ public class BinarySearchTree {
 		
 		printTree(curr.right);
 	}
+
+	//BST searching
+	public void find(int data) {
+		Node node = find(root,data);
+		if(node != null) {
+			System.out.println("Data found");
+		}else {
+			System.out.println("Data Not found");
+		}
+	}
+	
+	private Node find(Node curr,int data) {
+		if(curr == null || curr.data == data) {
+			return curr;
+		}
+		
+		if(curr.data > data) {
+			return find(curr.left,data);
+		}
+		return find(curr.right,data);
+	}
 }
