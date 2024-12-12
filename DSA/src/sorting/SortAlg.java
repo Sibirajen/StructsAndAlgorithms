@@ -1,4 +1,4 @@
-package Sorting;
+package sorting;
 
 public class SortAlg {
   private void swap(int[] arr,int i,int j){

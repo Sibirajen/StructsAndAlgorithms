@@ -1,4 +1,4 @@
-package BinarySearchTree;
+package binarySearchTree;
 
 class Node{
 	int data;
