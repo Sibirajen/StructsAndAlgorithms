@@ -29,7 +29,50 @@ public class AVLTree {
 		return n.height;
 	}
 	
-	//insert method
+//  Right rotation
+//			 z                                      y 
+//       	/ \                                   /   \
+//  	   y   T4      Right Rotate (z)          x      z
+// 		  / \          - - - - - - - - ->      /  \    /  \ 
+//		 x   T3                               T1  T2  T3  T4
+//      / \
+//    T1   T2
+	public Node rightRotate(Node z) {
+		Node y = z.left;
+		Node T3 = y.right;
+		
+		y.right = z;
+		z.left = T3;
+		
+		z.height = 1 + Math.max(getHeight(z.left), getHeight(z.right));
+		y.height = 1 + Math.max(getHeight(y.left), getHeight(y.right));
+		
+		return y;
+	}
+
+	
+//  Left rotation	
+//	   z                                y
+//	  /  \                            /   \ 
+//	 T4   y     Left Rotate(z)       z      x
+//	     /  \   - - - - - - - ->    / \    / \
+//	    T3   x                     T4  T3 T2  T1
+//	        / \
+//	      T2  T1
+	public Node leftRotate(Node z) {
+		Node y = z.right;
+		Node T3 = y.left;
+		
+		y.left = z;
+		z.right = T3;
+		
+		z.height = 1 + Math.max(getHeight(z.left), getHeight(z.right));
+		y.height = 1 + Math.max(getHeight(y.left), getHeight(y.right));
+		
+		return y;
+	}
+	
+	//This is the insertion method
 	public void insert(int data) {
 		this.root = insert(root,data);
 	}
@@ -53,6 +96,36 @@ public class AVLTree {
 		
 		int bf = getBalanceFactor(curr);
 		
+		if(bf > 1 && data < curr.left.data) {
+			//Right rotation
+			return rightRotate(curr);
+		}
+		if(bf < -1 && data > curr.right.data) {
+			//Left rotation
+			return leftRotate(curr);
+		}
+		if(bf > 1 && data > curr.left.data) {
+			//Right-left rotation
+			curr.left = leftRotate(curr.left);
+			return rightRotate(curr);
+		}
+
+		if(bf < -1 && data < curr.right.data) {
+			//Left-right rotation
+			curr.right = rightRotate(curr.right);
+			return leftRotate(curr);
+		}
 		return curr;
 	}
+	
+	public void inOrder() {
+		inOrder(this.root);
+	}
+	private void inOrder(Node curr) { 
+        if (curr != null) { 
+            inOrder(curr.left);
+            System.out.print(curr.data + " "); 
+            inOrder(curr.right); 
+        }
+    } 
 }
