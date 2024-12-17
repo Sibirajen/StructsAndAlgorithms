@@ -105,13 +105,13 @@ public class AVLTree {
 			return leftRotate(curr);
 		}
 		if(bf > 1 && data > curr.left.data) {
-			//Right-left rotation
+			//left-right rotation
 			curr.left = leftRotate(curr.left);
 			return rightRotate(curr);
 		}
 
 		if(bf < -1 && data < curr.right.data) {
-			//Left-right rotation
+			//right-left rotation
 			curr.right = rightRotate(curr.right);
 			return leftRotate(curr);
 		}
