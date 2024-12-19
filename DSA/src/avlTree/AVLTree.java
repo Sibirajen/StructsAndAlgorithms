@@ -125,6 +125,16 @@ public class AVLTree {
 		return performRotation(curr,data);
 	}
 	
+//	This is delete node method
+	public void delete(int data) {
+		this.root = delete(this.root,data);
+	}
+	private Node delete(Node curr,int data) {
+		
+		return curr;
+	}
+	
+	
 //	This is to perform traversal
 	public void inOrder() {
 		inOrder(this.root);
