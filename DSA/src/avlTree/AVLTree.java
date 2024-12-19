@@ -13,7 +13,7 @@ class Node{
 public class AVLTree {
 	Node root;
 	
-	//This method will get the balance factor of the current node
+//	This method will get the balance factor of the current node
 	private int getBalanceFactor(Node n) {
 		if(n == null) {
 			return 0;
@@ -21,7 +21,7 @@ public class AVLTree {
 		return getHeight(n.left) - getHeight(n.right);
 	}
 	
-	//This method will get the current height of the node
+//	This method will get the current height of the node
 	private int getHeight(Node n) {
 		if(n == null) {
 			return 0;
@@ -72,7 +72,37 @@ public class AVLTree {
 		return y;
 	}
 	
-	//This is the insertion method
+//	This is perform rotation and calling leftRotate and rightRotate
+	private Node performRotation(Node curr,int data) {
+		curr.height = 1 + Math.max(getHeight(curr.left), getHeight(curr.right));
+		
+		int bf = getBalanceFactor(curr);
+		
+		if(bf > 1 && data < curr.left.data) {
+//			Right rotation
+			return rightRotate(curr);
+		}
+		if(bf < -1 && data > curr.right.data) {
+//			Left rotation
+			return leftRotate(curr);
+		}
+		if(bf > 1 && data > curr.left.data) {
+//			left-right rotation
+			curr.left = leftRotate(curr.left);
+			return rightRotate(curr);
+		}
+
+		if(bf < -1 && data < curr.right.data) {
+//			right-left rotation
+			curr.right = rightRotate(curr.right);
+			return leftRotate(curr);
+		}
+		
+		return curr;
+	}
+	
+	
+//	This is the insertion method
 	public void insert(int data) {
 		this.root = insert(root,data);
 	}
@@ -92,32 +122,10 @@ public class AVLTree {
 			return curr;
 		}
 		
-		curr.height = 1 + Math.max(getHeight(curr.left), getHeight(curr.right));
-		
-		int bf = getBalanceFactor(curr);
-		
-		if(bf > 1 && data < curr.left.data) {
-			//Right rotation
-			return rightRotate(curr);
-		}
-		if(bf < -1 && data > curr.right.data) {
-			//Left rotation
-			return leftRotate(curr);
-		}
-		if(bf > 1 && data > curr.left.data) {
-			//left-right rotation
-			curr.left = leftRotate(curr.left);
-			return rightRotate(curr);
-		}
-
-		if(bf < -1 && data < curr.right.data) {
-			//right-left rotation
-			curr.right = rightRotate(curr.right);
-			return leftRotate(curr);
-		}
-		return curr;
+		return performRotation(curr,data);
 	}
 	
+//	This is to perform traversal
 	public void inOrder() {
 		inOrder(this.root);
 	}
