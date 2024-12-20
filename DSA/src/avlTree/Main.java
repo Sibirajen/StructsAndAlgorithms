@@ -13,6 +13,11 @@ public class Main {
 		tree.insert(25);
 		
 		tree.inOrder();
+		
+		tree.delete(20);
+		tree.inOrder();
+		
+		tree.find(20);
 	}
 
 }

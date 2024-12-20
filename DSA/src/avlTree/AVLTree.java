@@ -125,25 +125,76 @@ public class AVLTree {
 		return performRotation(curr,data);
 	}
 	
-//	This is delete node method
-	public void delete(int data) {
-		this.root = delete(this.root,data);
-	}
-	private Node delete(Node curr,int data) {
-		
+//	This is to get the inOrder successor
+	private Node getSuccessor(Node curr) {
+		curr = curr.right;
+		while(curr != null && curr.left != null) {
+			curr = curr.left;
+		}
 		return curr;
 	}
+//	This is delete node method
+	public void delete(int data) {
+		root = delete(root,data);
+	}
 	
+	private Node delete(Node curr,int data) {
+		if(curr == null) {
+			return curr;
+		}
+		
+		if(curr.data > data) {
+			curr.left = delete(curr.left,data);
+		}
+		else if(curr.data < data) {
+			curr.right = delete(curr.right,data);
+		}
+		else {
+			if(curr.left == null) {
+				return curr.right;
+			}
+			if(curr.right == null) {
+				return curr.left;
+			}
+			
+			Node succ = getSuccessor(curr);
+			curr.data = succ.data;
+			curr.right = delete(curr.right,succ.data);
+		}
+		return performRotation(curr,data);
+	}
+	
+//	This is to search the data
+	public void find(int data) {
+		Node node = find(root,data);
+		if(node != null) {
+			System.out.println("Data found");
+		}else {
+			System.out.println("Data Not found");
+		}
+	}
+	
+	private Node find(Node curr,int data) {
+		if(curr == null || curr.data == data) {
+			return curr;
+		}
+		
+		if(curr.data > data) {
+			return find(curr.left,data);
+		}
+		return find(curr.right,data);
+	}
 	
 //	This is to perform traversal
 	public void inOrder() {
 		inOrder(this.root);
+		System.out.println();
 	}
 	private void inOrder(Node curr) { 
-        if (curr != null) { 
+        if (curr != null) {  
             inOrder(curr.left);
-            System.out.print(curr.data + " "); 
+            System.out.print(curr.data + " ");
             inOrder(curr.right); 
         }
-    } 
+    }
 }
