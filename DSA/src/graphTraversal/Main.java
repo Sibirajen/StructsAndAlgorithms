@@ -37,13 +37,22 @@ public class Main {
         g.addEdge(6, 9);  // G - J
         g.addEdge(5, 7);  // F - H
 
-        System.out.println(g);
+//        System.out.println(g);
 //        g.bfs('A', Through.adjMat);
 //        g.bfs('A', Through.adjList);
 //        A → B → C → D → E → G → J → H → I
 
-        g.bfsDisconnected(Through.adjMat);
+//        g.bfsDisconnected(Through.adjMat);
 //        g.bfsDisconnected(Through.adjList);
+//        A -> B -> C -> D -> E
+//        F -> G -> H -> I -> J
+
+//        g.dfs('A', Through.adjList);
+//        g.dfs('A', Through.adjMat);
+//        A → B → C → D → E → G → H → I → J → F
+
+//        g.dfsDisconnected(Through.adjList);
+        g.dfsDisconnected(Through.adjMat);
 //        A -> B -> C -> D -> E
 //        F -> G -> H -> I -> J
     }
