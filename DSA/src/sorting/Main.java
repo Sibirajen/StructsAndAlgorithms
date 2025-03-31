@@ -1,19 +1,18 @@
 package sorting;
 
-import java.util.Arrays;
 
 public class Main {
-  public static void main(String[] args) {
-    int[] arr = {9,3,5,6,2,1};
-    SortAlg srt = new SortAlg();
+    public static void main(String[] args) {
+        int[] arr = {9,3,5,6,2,1};
 
-    System.out.println(Arrays.toString(arr));
-//    srt.bubbleSort(arr);
-//    srt.selectionSort(arr);
-//    srt.insertionSort(arr);
-//    srt.mergeSort(arr,0, arr.length-1);
-//    srt.quickSort(arr,0,arr.length-1);
-    srt.heapSort(arr);
-    System.out.println(Arrays.toString(arr));
-  }
+        Arrays.print(arr);
+//        BubbleSort.sort(arr);
+//        SelectionSort.sort(arr);
+//        InsertionSort.sort(arr);
+//        MergeSort.sort(arr);
+//        QuickSort.sort(arr);
+        HeapSort.sort(arr);
+        Arrays.print(arr);
+
+    }
 }
