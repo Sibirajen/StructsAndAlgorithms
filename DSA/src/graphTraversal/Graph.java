@@ -118,4 +118,40 @@ public class Graph {
             }
         }
     }
+
+    public void dfs(char vertex, Through through){
+        visited[vertex - 'A'] = true;
+        System.out.print(vertex + " ");
+        if(through.equals(Through.adjList)){
+            List<Character> list = adjList.get(vertex);
+            if(list != null && !list.isEmpty()){
+                for (char ch: list){
+                    if (!visited[ch - 'A']){
+                        dfs(ch, Through.adjList);
+                    }
+                }
+            }
+        }
+        else{
+            for(int i=0;i<vertexData.length;i++){
+                if(adjMat[vertex-'A'][i] == 1 && !visited[i]){
+                    dfs((char)(i+'A'), Through.adjMat);
+                }
+            }
+        }
+    }
+
+    public void dfsDisconnected(Through through){
+        for(int i=0;i< vertexData.length;i++){
+            if(!visited[i]){
+                if(through.equals(Through.adjList)){
+                    dfs(vertexData[i], Through.adjList);
+                    System.out.println();
+                }else{
+                    dfs(vertexData[i], Through.adjMat);
+                    System.out.println();
+                }
+            }
+        }
+    }
 }
